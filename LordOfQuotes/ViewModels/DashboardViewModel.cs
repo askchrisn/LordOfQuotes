@@ -28,7 +28,7 @@ namespace LordOfQuotes.ViewModels
             {
                 var books = await HttpService.GetQuotes();
                 Console.WriteLine(books);
-                TextString = books;
+                //TextString = books;
             }
             catch(Exception ex)
             {

@@ -41,7 +41,7 @@ namespace LordOfQuotes
             // SERVICES
 
             // SINGLETON SERVICES
-            services.AddSingleton<IHttpHandlerService>();
+            // services.AddSingleton<IHttpHandlerService>();
             services.AddSingleton<IHttpService, HttpService>();
 
             ServiceProvider = services.BuildServiceProvider();

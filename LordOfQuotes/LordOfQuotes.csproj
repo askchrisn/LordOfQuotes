@@ -25,6 +25,7 @@
     <None Remove="Services\" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="Services\DataServices\" />
+    <None Remove="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -33,5 +34,6 @@
     <Folder Include="ViewModels\Base\" />
     <Folder Include="Services\" />
     <Folder Include="Services\DataServices\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
 </Project>

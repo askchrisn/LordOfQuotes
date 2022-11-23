@@ -1,13 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using LordOfQuotes.Dtos;
+using LordOfQuotes.Models;
 using LordOfQuotes.Services.DataServices;
 
 namespace LordOfQuotes.Services
 {
     public class HttpService : ApiServiceBase, IHttpService
     {
-        public Task<string> GetQuotes()
+        public async Task<List<Quote>> GetQuotes()
         {
-            return GetAsync<string>($"v2/quote");
+            var dto = await GetAsync<Root>($"v2/quote");
+
+            var listOfQuotes = new List<Quote>();
+            foreach(var quoteDto in dto.docs)
+            {
+                listOfQuotes.Add(new Quote(quoteDto));
+            }
+
+            return listOfQuotes;
         }
     }
 }

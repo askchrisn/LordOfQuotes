@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using LordOfQuotes.Dtos;
+using LordOfQuotes.Models;
 
 namespace LordOfQuotes.Services
 {
     public interface IHttpService 
     {
-        Task<string> GetQuotes();
+        Task<List<Quote>> GetQuotes();
     }
 }

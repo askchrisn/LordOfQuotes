@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using LordOfQuotes.Dtos;
 using Newtonsoft.Json;
 
 namespace LordOfQuotes.Services.DataServices
@@ -17,12 +18,14 @@ namespace LordOfQuotes.Services.DataServices
             authKey = "ArKxecgybWqdt767qKpB";
             baseUrl = "the-one-api.dev/";
 
-            #if DEBUG
-                var httpHandlerService = App.ServiceProvider.GetService(typeof(IHttpHandlerService)) as IHttpHandlerService;
-                client = new HttpClient(httpHandlerService.GetHttpHandler());
-            #else
-                client = new HttpClient();
-            #endif
+            client = new HttpClient();
+
+            //#if DEBUG
+            //    //var httpHandlerService = App.ServiceProvider.GetService(typeof(IHttpHandlerService)) as IHttpHandlerService;
+            //    //client = new HttpClient(httpHandlerService.GetHttpHandler());
+            //#else
+            //    client = new HttpClient();
+            //#endif
         }
 
         public async Task<TApiResult> GetAsync<TApiResult>(string url)
@@ -53,8 +56,8 @@ namespace LordOfQuotes.Services.DataServices
             }
 
             content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            return JsonConvert.DeserializeObject<T>(content);
+            var convertedContent = JsonConvert.DeserializeObject<T>(content);
+            return convertedContent;
         }
     }
 }
