@@ -4,19 +4,20 @@ using LordOfQuotes.Services.DataServices;
 
 namespace LordOfQuotes.Services
 {
-    public class HttpService : ApiServiceBase, IHttpService
+    public class HttpService : IHttpService
     {
-        private string baseUrl = "https://the-one-api.dev/v2";
-        private string key = "ArKxecgybWqdt767qKpB";
+        private const string BASE_URL = "https://the-one-api.dev/";
+        private const string API_KEY = "ArKxecgybWqdt767qKpB";
+        private ApiServiceBase apiServiceBase;
 
-        public HttpService(IRequestService requestProvider) : base(requestProvider)
+        public HttpService()
         {
-
+            apiServiceBase = new ApiServiceBase(BASE_URL, API_KEY);
         }
 
         public Task<string> GetBooks()
         {
-            return GetAsync<string>($"{this.baseUrl}/quote", key);
+            return apiServiceBase.GetAsync<string>($"v2/quote");
         }
     }
 }

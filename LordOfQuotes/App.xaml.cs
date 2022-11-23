@@ -35,9 +35,6 @@ namespace LordOfQuotes
 
         private void SetupServices()
         {
-            // API KEYS HERE
-            Xamarin.Essentials.SecureStorage.SetAsync("LORAPI", "ArKxecgybWqdt767qKpB");
-
             var services = new ServiceCollection();
 
             // VIEW MODELS
