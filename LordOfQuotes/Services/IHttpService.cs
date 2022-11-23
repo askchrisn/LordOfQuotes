@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace LordOfQuotes.Services
 {
-    public interface IHttpService
+    public interface IHttpService 
     {
-        Task<string> GetBooks();
+        Task<string> GetQuotes();
     }
 }

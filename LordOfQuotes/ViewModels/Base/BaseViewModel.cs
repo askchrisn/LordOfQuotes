@@ -12,7 +12,7 @@ namespace LordOfQuotes.ViewModels
 
         public BaseViewModel()
         {
-            HttpService = App.ServiceProvider.GetService(typeof(IHttpService)) as HttpService;
+            HttpService = App.ServiceProvider.GetService(typeof(IHttpService)) as IHttpService;
         }
 
         bool isBusy = false;

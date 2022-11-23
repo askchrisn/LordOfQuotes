@@ -1,11 +1,8 @@
-﻿using System;
-using LordOfQuotes.Services;
+﻿using LordOfQuotes.Services;
 using LordOfQuotes.Services.DataServices;
 using LordOfQuotes.ViewModels;
-using LordOfQuotes.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace LordOfQuotes
 {
@@ -45,7 +42,6 @@ namespace LordOfQuotes
 
             // SINGLETON SERVICES
             services.AddSingleton<IHttpHandlerService>();
-            services.AddSingleton<IRequestService, RequestService>();
             services.AddSingleton<IHttpService, HttpService>();
 
             ServiceProvider = services.BuildServiceProvider();
