@@ -5,7 +5,7 @@
     x:Class="LordOfQuotes.Views.Templates.QuoteTemplate">
     <ContentView.Content>
 
-        <StackLayout BackgroundColor="LightBlue" Orientation="Horizontal" HeightRequest="60" >
+        <StackLayout BackgroundColor="LightBlue" Orientation="Horizontal" Padding="10" HeightRequest="60" >
             <Label Text="{Binding Dialog}" VerticalOptions="CenterAndExpand"></Label>
             <Button Text="X" Clicked="RemoveQuoteClicked" BackgroundColor="Red" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"></Button>
         </StackLayout>

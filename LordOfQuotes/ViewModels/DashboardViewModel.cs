@@ -54,7 +54,7 @@ namespace LordOfQuotes.ViewModels
             {
                 AllQuotes.Remove(quote);
                 Quotes.Remove(quote);
-                Quotes.Add(AllQuotes.ElementAt(LastIndex));
+                Quotes.Add(AllQuotes.ElementAt(LastIndex+9));
             }
             catch (Exception ex)
             {

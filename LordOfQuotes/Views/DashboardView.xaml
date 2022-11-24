@@ -7,7 +7,7 @@
     x:Class="LordOfQuotes.Views.DashboardView"
     x:Name="DashboardViewPage">
 
-    <StackLayout>
+    <StackLayout Padding="10">
         <Button Text="Joker" BackgroundColor="Black" Command="{Binding ButtonClickedCommand}"></Button>
 
         <ScrollView>
