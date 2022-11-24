@@ -7,6 +7,6 @@ namespace LordOfQuotes.Services
 {
     public interface IHttpService 
     {
-        Task<List<Quote>> GetQuotes();
+        Task<PaginatedQuotes> GetQuotes(int page);
     }
 }

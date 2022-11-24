@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="LordOfQuotes.Views.Templates.QuoteTemplate">
+    <ContentView.Content>
+
+        <StackLayout BackgroundColor="LightBlue" Orientation="Horizontal" HeightRequest="60" >
+            <Label Text="{Binding Dialog}" VerticalOptions="CenterAndExpand"></Label>
+            <Button Text="X" Clicked="RemoveQuoteClicked" BackgroundColor="Red" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"></Button>
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

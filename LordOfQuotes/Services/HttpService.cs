@@ -8,17 +8,11 @@ namespace LordOfQuotes.Services
 {
     public class HttpService : ApiServiceBase, IHttpService
     {
-        public async Task<List<Quote>> GetQuotes()
+        public async Task<PaginatedQuotes> GetQuotes(int pageNumber)
         {
-            var dto = await GetAsync<Root>($"v2/quote");
+            var dto = await GetAsync<Root>($"v2/quote").ConfigureAwait(false);
 
-            var listOfQuotes = new List<Quote>();
-            foreach(var quoteDto in dto.docs)
-            {
-                listOfQuotes.Add(new Quote(quoteDto));
-            }
-
-            return listOfQuotes;
+            return new PaginatedQuotes(dto);
         }
     }
 }

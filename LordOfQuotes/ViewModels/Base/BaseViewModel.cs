@@ -12,8 +12,7 @@ namespace LordOfQuotes.ViewModels
 
         public BaseViewModel()
         {
-            var huh = App.ServiceProvider.GetService(typeof(IHttpService)) as IHttpService;
-            HttpService = huh;
+            HttpService = App.ServiceProvider.GetService(typeof(IHttpService)) as IHttpService;
         }
 
         bool isBusy = false;
@@ -28,11 +27,6 @@ namespace LordOfQuotes.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
-        }
-
-        public virtual Task InitializeAsync(object parameter = null)
-        {
-            return Task.CompletedTask;
         }
     }
 }
