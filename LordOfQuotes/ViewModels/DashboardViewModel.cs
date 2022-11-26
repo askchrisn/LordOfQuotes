@@ -65,9 +65,8 @@ namespace LordOfQuotes.ViewModels
                 if (!Quotes.Any())
                 {
                     PageDown();
+                    return;
                 }
-
-                Console.WriteLine(Quotes.Count());
 
                 if(IndexOfTopOfPage + 9 < AllQuotes.Count)
                 {
