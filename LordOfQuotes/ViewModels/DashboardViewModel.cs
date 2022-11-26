@@ -14,7 +14,7 @@ namespace LordOfQuotes.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        private int LastIndex;
+        private int IndexOfTopOfPage;
         private List<Quote> AllQuotes = new List<Quote>();
 
         public DashboardViewModel()
@@ -61,7 +61,21 @@ namespace LordOfQuotes.ViewModels
             {
                 AllQuotes.Remove(quote);
                 Quotes.Remove(quote);
-                Quotes.Add(AllQuotes.ElementAt(LastIndex+9));
+
+                if (!Quotes.Any())
+                {
+                    PageDown();
+                }
+
+                Console.WriteLine(Quotes.Count());
+
+                if(IndexOfTopOfPage + 9 < AllQuotes.Count)
+                {
+                    Quotes.Add(AllQuotes.ElementAt(IndexOfTopOfPage + 9));
+                }
+
+                var maxPageNumber = CalculateLastPage();
+                PaginationString = $"{PageNumber} of {maxPageNumber}";
             }
             catch (Exception ex)
             {
@@ -79,15 +93,15 @@ namespace LordOfQuotes.ViewModels
         private void SetPagination(bool forward)
         {
             // Get the next index that is needed
-            LastIndex = AllQuotes.IndexOf(Quotes.LastOrDefault())+1;
+            IndexOfTopOfPage = AllQuotes.IndexOf(Quotes.LastOrDefault())+1;
 
             if(!forward)
             {
                 // Get the index of 20 back and take the next 10 to go back 10
-                LastIndex = LastIndex - 20 > 0 ? LastIndex - 20 : 0; 
+                IndexOfTopOfPage = IndexOfTopOfPage - 20 > 0 ? IndexOfTopOfPage - 20 : 0; 
             }
 
-            var subsetOfQuotes = AllQuotes.Skip(LastIndex).Take(10);
+            var subsetOfQuotes = AllQuotes.Skip(IndexOfTopOfPage).Take(10);
             Quotes = new ObservableCollection<Quote>(subsetOfQuotes);
 
             var maxPageNumber = CalculateLastPage();
@@ -96,7 +110,7 @@ namespace LordOfQuotes.ViewModels
 
         private decimal CalculateLastPage()
         {
-            decimal amountCount = AllQuotes.Count() / 10;
+            decimal amountCount = (decimal)AllQuotes.Count() / (decimal)10;
             var maxPageNumber = Math.Ceiling(amountCount);
 
             return maxPageNumber;

@@ -8,7 +8,7 @@
     x:Name="DashboardViewPage">
 
     <StackLayout Padding="10">
-        <ScrollView>
+        <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout BindableLayout.ItemsSource="{Binding Quotes}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
