@@ -14,6 +14,9 @@ namespace LordOfQuotes.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
+        private int LastIndex;
+        private List<Quote> AllQuotes = new List<Quote>();
+
         public DashboardViewModel()
         {
             GetAllQuotes();
@@ -24,6 +27,8 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
+                if (PageNumber == 1) return;
+
                 PageNumber--;
                 SetPagination(false);
             }
@@ -38,6 +43,8 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
+                if (PageNumber >= CalculateLastPage()) return;
+
                 PageNumber++;
                 SetPagination(true);
             }
@@ -82,12 +89,18 @@ namespace LordOfQuotes.ViewModels
 
             var subsetOfQuotes = AllQuotes.Skip(LastIndex).Take(10);
             Quotes = new ObservableCollection<Quote>(subsetOfQuotes);
+
+            var maxPageNumber = CalculateLastPage();
+            PaginationString = $"{PageNumber} of {maxPageNumber}";
         }
 
-        private int PageNumber = 1;
-        private int LastIndex;
+        private decimal CalculateLastPage()
+        {
+            decimal amountCount = AllQuotes.Count() / 10;
+            var maxPageNumber = Math.Ceiling(amountCount);
 
-        private List<Quote> AllQuotes = new List<Quote>();
+            return maxPageNumber;
+        }
 
         private ObservableCollection<Quote> _quotes = new ObservableCollection<Quote>();
         public ObservableCollection<Quote> Quotes
@@ -96,11 +109,18 @@ namespace LordOfQuotes.ViewModels
             set => SetProperty(ref _quotes, value);
         }
 
-        private string _pagination;
-        public string Pagination
+        private int _pageNumber = 1;
+        public int PageNumber
         {
-            get { return _pagination; }
-            set { SetProperty(ref _pagination, value); }
+            get { return _pageNumber; }
+            set { SetProperty(ref _pageNumber, value); }
+        }
+
+        private string _paginationString;
+        public string PaginationString
+        {
+            get { return _paginationString; }
+            set { SetProperty(ref _paginationString, value); }
         }
     }
 }

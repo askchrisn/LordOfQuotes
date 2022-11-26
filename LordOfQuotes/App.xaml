@@ -4,5 +4,20 @@
              x:Class="LordOfQuotes.App">
     <Application.Resources>
 
+        <ResourceDictionary>
+
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="LightCyan">#A3F7BF</Color>
+            <Color x:Key="Cyan">#29A19C</Color>
+            <Color x:Key="Dark">#222831</Color>
+            <Color x:Key="Darker">#1a1f25</Color>
+
+            <Style x:Key="PaginationButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="LightBlue"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

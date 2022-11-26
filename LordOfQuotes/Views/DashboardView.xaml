@@ -8,10 +8,8 @@
     x:Name="DashboardViewPage">
 
     <StackLayout Padding="10">
-        <Button Text="Joker" BackgroundColor="Black" Command="{Binding ButtonClickedCommand}"></Button>
-
         <ScrollView>
-        <StackLayout BindableLayout.ItemsSource="{Binding Quotes}">
+            <StackLayout BindableLayout.ItemsSource="{Binding Quotes}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <templates:QuoteTemplate ParentContext="{Binding BindingContext, Source={x:Reference DashboardViewPage}}"/>
@@ -20,10 +18,20 @@
         </StackLayout>
         </ScrollView>
 
-        <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand">
-            <Button Text="Left" Command="{Binding PageDownCommand}"></Button>
-            <Button Text="{Binding Pagination}"></Button>
-            <Button Text="Right" Command="{Binding PageUpCommand}"></Button>
+        <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+            <Button
+                Text="Left"
+                Command="{Binding PageDownCommand}"
+                Style="{StaticResource PaginationButton}">
+            </Button>
+
+            <Label Text="{Binding PaginationString}" FontSize="Medium"></Label>
+
+            <Button
+                Text="Right"
+                Command="{Binding PageUpCommand}"
+                Style="{StaticResource PaginationButton}">
+            </Button>
         </StackLayout>
 
     </StackLayout>
