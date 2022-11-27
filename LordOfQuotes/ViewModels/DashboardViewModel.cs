@@ -14,6 +14,11 @@ namespace LordOfQuotes.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
+        private const decimal ITEMSPERPAGE = 10;
+
+        private int PageNumber { get; set; } = 1;
+        private int PageLimit => (int)Math.Ceiling(Datacache.GetTotalQuoteCount() / ITEMSPERPAGE);
+
         public DashboardViewModel()
         {
             InitializeData();
@@ -25,10 +30,11 @@ namespace LordOfQuotes.ViewModels
             try
             {
                 // if on first page return
-                if (Datacache.PageNumber <= 1) return;
+                if (PageNumber <= 1) return;
 
+                PageNumber--;
                 Datacache.PreviousQuotes();
-                PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
+                PaginationString = $"{PageNumber} of {PageLimit}";
             }
             catch (Exception ex)
             {
@@ -42,10 +48,11 @@ namespace LordOfQuotes.ViewModels
             try
             {
                 // if last page return
-                if (Datacache.PageNumber >= Datacache.PageLimit) return;
+                if (PageNumber >= PageLimit) return;
 
+                PageNumber++;
                 Datacache.NextQuotes();
-                PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
+                PaginationString = $"{PageNumber} of {PageLimit}";
             }
             catch (Exception ex)
             {
@@ -66,7 +73,7 @@ namespace LordOfQuotes.ViewModels
                     Datacache.PreviousQuotes();
                 }
 
-                PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
+                PaginationString = $"{PageNumber} of {PageLimit}";
             }
             catch (Exception ex)
             {
@@ -78,7 +85,7 @@ namespace LordOfQuotes.ViewModels
         {
             var paginatedQuotes = await HttpService.GetQuotes();
             Datacache = new Datacache(paginatedQuotes.Quotes, 10);
-            PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
+            PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
         private IDatacache _datacache;

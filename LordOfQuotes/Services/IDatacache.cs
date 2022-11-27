@@ -7,11 +7,10 @@ namespace LordOfQuotes.Services
     public interface IDatacache
     {
         ObservableCollection<Quote> Quotes { get; }
-        int PageNumber { get; }
-        int PageLimit { get; }
-        bool RemoveQuote(Quote quote);
+        int GetTotalQuoteCount();
+        void RemoveQuote(Quote quote);
         void AddNewQuote();
-        bool PreviousQuotes();
-        bool NextQuotes();
+        void PreviousQuotes();
+        void NextQuotes();
     }
 }

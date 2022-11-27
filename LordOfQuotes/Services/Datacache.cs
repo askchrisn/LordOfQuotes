@@ -11,8 +11,6 @@ namespace LordOfQuotes.Services
     {
         private List<Quote> AllQuotes { get; set; }
         private int ItemsPerPage { get; set; }
-        public int PageNumber { get; private set; } = 1;
-        public int PageLimit { get; private set; }
 
         private ObservableCollection<Quote> _quotes = new ObservableCollection<Quote>();
         public ObservableCollection<Quote> Quotes
@@ -26,18 +24,12 @@ namespace LordOfQuotes.Services
             AllQuotes = quotes;
             Quotes = new ObservableCollection<Quote>(AllQuotes.Take(itemsPerPage));
             ItemsPerPage = itemsPerPage;
-
-            CalculatePageLimit();
         }
 
-        public bool RemoveQuote(Quote quote)
+        public void RemoveQuote(Quote quote)
         {
             AllQuotes.Remove(quote);
             Quotes.Remove(quote);
-
-            CalculatePageLimit();
-
-            return true;
         }
 
         public void AddNewQuote()
@@ -46,33 +38,25 @@ namespace LordOfQuotes.Services
             if (nextIndex >= AllQuotes.Count - 1) return;
 
             Quotes.Add(AllQuotes[nextIndex]);
-
-            CalculatePageLimit();
         }
 
-        public bool NextQuotes()
+        public void NextQuotes()
         {
-            PageNumber++;
             // get index of last quote in list
             var startIndex = AllQuotes.IndexOf(Quotes.LastOrDefault()) + 1;
             Quotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
-
-            return true;
         }
 
-        public bool PreviousQuotes()
+        public void PreviousQuotes()
         {
-            PageNumber--;
             // get index of first quote in list
             var startIndex = AllQuotes.IndexOf(Quotes.FirstOrDefault()) - ItemsPerPage;
             Quotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
-
-            return true;
         }
 
-        public void CalculatePageLimit()
+        public int GetTotalQuoteCount()
         {
-            PageLimit = (int)Math.Ceiling((decimal)AllQuotes.Count() / (decimal)ItemsPerPage);
+            return AllQuotes.Count();
         }
 
         private List<Quote> CreateSubset(int index)
