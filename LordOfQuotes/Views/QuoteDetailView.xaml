@@ -27,6 +27,8 @@
                 <Label Text="{Binding Character.Hair}"></Label>
                 <Label Text="{Binding Character.Name}"></Label>
             </StackLayout>
+
+            <Button Command="{Binding RemoveQuoteCommand}" Text="Read"></Button>
         </StackLayout>
 
     </ContentPage.Content>

@@ -19,7 +19,7 @@ namespace LordOfQuotes.Services
             private set => SetProperty(ref _quotes, value);
         }
 
-        public Datacache(List<Quote> quotes, int itemsPerPage)
+        public void SetDatacache(List<Quote> quotes, int itemsPerPage)
         {
             AllQuotes = quotes;
             Quotes = new ObservableCollection<Quote>(AllQuotes.Take(itemsPerPage));
@@ -66,6 +66,13 @@ namespace LordOfQuotes.Services
             var subset = AllQuotes.Skip(startIndex).Take(10).ToList();
 
             return subset;
+        }
+
+        private string _paginationString;
+        public string PaginationString
+        {
+            get { return _paginationString; }
+            set { SetProperty(ref _paginationString, value); }
         }
     }
 }

@@ -11,15 +11,19 @@ namespace LordOfQuotes.ViewModels
 {
     public class BaseViewModel : NotifyPropertyChanged
     {
+        private const decimal ITEMSPERPAGE = 10;
+
         public IHttpService HttpService { get; }
+        public int PageNumber { get; set; } = 1;
+        public int PageLimit => (int)Math.Ceiling(Datacache.GetTotalQuoteCount() / ITEMSPERPAGE);
 
         public BaseViewModel()
         {
+            Datacache = App.ServiceProvider.GetService(typeof(IDatacache)) as IDatacache;
             HttpService = App.ServiceProvider.GetService(typeof(IHttpService)) as IHttpService;
         }
 
-        public ICommand RemoveQuoteCommand => new Command<Quote>(async (quote) => await RemoveQuote(quote));
-        public virtual async Task RemoveQuote(Quote quote)
+        public void MarkQuoteAsRead(Quote quote)
         {
             try
             {
@@ -30,6 +34,8 @@ namespace LordOfQuotes.ViewModels
                 {
                     Datacache.PreviousQuotes();
                 }
+
+                PaginationString = $"{PageNumber} of {PageLimit}";
             }
             catch (Exception ex)
             {
@@ -42,6 +48,13 @@ namespace LordOfQuotes.ViewModels
         {
             get => _datacache;
             set => SetProperty(ref _datacache, value);
+        }
+
+        private string _paginationString;
+        public string PaginationString
+        {
+            get => _paginationString;
+            set => SetProperty(ref _paginationString, value);
         }
 
         bool isBusy = false;

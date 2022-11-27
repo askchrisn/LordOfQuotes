@@ -15,16 +15,38 @@ namespace LordOfQuotes.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        private const decimal ITEMSPERPAGE = 10;
-
-        private int PageNumber { get; set; } = 1;
-        private int PageLimit => (int)Math.Ceiling(Datacache.GetTotalQuoteCount() / ITEMSPERPAGE);
+        public DashboardViewModel()
+        {
+            GetAllQuotes();
+        }
 
         public async Task OnAppearing()
         {
+            //var paginatedQuotes = await HttpService.GetQuotes();
+            //Datacache = new Datacache();
+            //Datacache.SetDatacache(paginatedQuotes.Quotes, 10);
+            //PaginationString = $"{PageNumber} of {PageLimit}";
+        }
+
+        private async void GetAllQuotes()
+        {
             var paginatedQuotes = await HttpService.GetQuotes();
-            Datacache = new Datacache(paginatedQuotes.Quotes, 10);
+            Datacache = new Datacache();
+            Datacache.SetDatacache(paginatedQuotes.Quotes, 10);
             PaginationString = $"{PageNumber} of {PageLimit}";
+        }
+
+        public ICommand RemoveQuoteCommand => new Command<Quote>(async (quote) => await RemoveQuote(quote));
+        private async Task RemoveQuote(Quote quote)
+        {
+            try
+            {
+                MarkQuoteAsRead(quote);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         public ICommand PageDownCommand { get => new Command(async () => await PageDown()); }
@@ -63,27 +85,6 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        public ICommand RemoveQuoteCommand => new Command<Quote>(async (quote) => await RemoveQuote(quote));
-        private async Task RemoveQuote(Quote quote)
-        {
-            try
-            {
-                Datacache.RemoveQuote(quote);
-                Datacache.AddNewQuote();
-
-                if (!Datacache.Quotes.Any())
-                {
-                    Datacache.PreviousQuotes();
-                }
-
-                PaginationString = $"{PageNumber} of {PageLimit}";
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-
         public ICommand GoToQuoteCommand => new Command<Quote>(async (quote) => await GoToQuote(quote));
         private async Task GoToQuote(Quote quote)
         {
@@ -95,20 +96,6 @@ namespace LordOfQuotes.ViewModels
             {
                 Console.WriteLine(ex);
             }
-        }
-
-        private IDatacache _datacache;
-        public IDatacache Datacache
-        {
-            get => _datacache;
-            set => SetProperty(ref _datacache, value);
-        }
-
-        private string _paginationString;
-        public string PaginationString
-        {
-            get { return _paginationString; }
-            set { SetProperty(ref _paginationString, value); }
         }
     }
 }

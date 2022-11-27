@@ -34,17 +34,16 @@ namespace LordOfQuotes
         {
             var services = new ServiceCollection();
 
+            // SERVICES
+
+            // SINGLETON SERVICES
+            services.AddSingleton<IDatacache, Datacache>();
+            services.AddSingleton<IHttpService, HttpService>();
+
             // VIEW MODELS
             services.AddTransient<BaseViewModel>();
             services.AddTransient<DashboardViewModel>();
             services.AddTransient<QuoteDetailViewModel>();
-
-            // SERVICES
-
-            // SINGLETON SERVICES
-            // services.AddSingleton<IHttpHandlerService>();
-            services.AddSingleton<IDatacache, Datacache>();
-            services.AddSingleton<IHttpService, HttpService>();
 
             ServiceProvider = services.BuildServiceProvider();
         }
