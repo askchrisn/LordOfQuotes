@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using LordOfQuotes.Models;
+using LordOfQuotes.Services;
 using Xamarin.Forms;
 
 namespace LordOfQuotes.ViewModels
