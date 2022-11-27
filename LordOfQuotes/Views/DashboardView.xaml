@@ -25,7 +25,7 @@
                 Style="{StaticResource PaginationButton}">
             </Button>
 
-            <Label Text="{Binding PaginationString}" FontSize="Medium"></Label>
+            <Label Text="{Binding Datacache.PaginationString}" FontSize="Medium"></Label>
 
             <Button
                 Text="Right"

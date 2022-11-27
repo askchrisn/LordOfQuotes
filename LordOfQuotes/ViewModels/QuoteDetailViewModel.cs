@@ -33,6 +33,7 @@ namespace LordOfQuotes.ViewModels
             try
             {
                 Datacache.RemoveQuote(QuoteToRemove);
+                Shell.Current.SendBackButtonPressed();
             }
             catch (Exception ex)
             {

@@ -24,8 +24,9 @@ namespace LordOfQuotes.Services
 
         public void RemoveQuote(Quote quote)
         {
-            bool s1 = AllQuotes.Remove(quote);
-            bool s2 = Quotes.Remove(quote);
+            var identicalQuote = AllQuotes.FirstOrDefault(x => x.Id == quote.Id);
+            AllQuotes.Remove(identicalQuote);
+            Quotes.Remove(identicalQuote);
 
             AddNewQuote();
             PaginationString = $"{PageNumber} of {PageLimit}";
