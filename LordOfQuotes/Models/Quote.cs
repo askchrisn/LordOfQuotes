@@ -10,12 +10,12 @@ namespace LordOfQuotes.Models
         public string Movie { get; set; }
         public string Character { get; set; }
 
-        public Quote(Doc doc)
+        public Quote(QuoteDto dto)
         {
-            Id = doc.id;
-            Dialog = doc.dialog;
-            Movie = doc.movie;
-            Character = doc.character;
+            Id = dto.id;
+            Dialog = dto.dialog;
+            Movie = dto.movie;
+            Character = dto.character;
         }
     }
 }

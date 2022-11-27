@@ -5,8 +5,14 @@
     x:Class="LordOfQuotes.Views.QuoteDetailView">
     <ContentPage.Content>
 
-        <StackLayout>
-            <Label Text="Test"></Label>
+        <StackLayout BackgroundColor="Yellow">
+            <Label Text="{Binding Movie.Name}"></Label>
+            <Label Text="{Binding Movie.RuntimeInMinutes}"></Label>
+            <Label Text="{Binding Movie.BudgetInMillions}"></Label>
+            <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}"></Label>
+            <Label Text="{Binding Movie.AcademyAwardNominations}"></Label>
+            <Label Text="{Binding Movie.AcademyAwardWins}"></Label>
+            <Label Text="{Binding Movie.RottenTomatoesScore}"></Label>
         </StackLayout>
 
     </ContentPage.Content>

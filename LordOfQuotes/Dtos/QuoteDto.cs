@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace LordOfQuotes.Dtos
 {
-    public class Doc
+    [JsonObject(Title = "Doc")]
+    public class QuoteDto
     {
         public string _id { get; set; }
         public string dialog { get; set; }
@@ -12,9 +14,10 @@ namespace LordOfQuotes.Dtos
         public string id { get; set; }
     }
 
-    public class Root
+    [JsonObject(Title = "Root")]
+    public class QuoteListDto
     {
-        public List<Doc> docs { get; set; }
+        public List<QuoteDto> docs { get; set; }
         public int total { get; set; }
         public int limit { get; set; }
         public int offset { get; set; }

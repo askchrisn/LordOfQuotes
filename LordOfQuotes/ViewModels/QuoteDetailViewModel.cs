@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using LordOfQuotes.Models;
 using Xamarin.Forms;
 
 namespace LordOfQuotes.ViewModels
@@ -10,7 +11,7 @@ namespace LordOfQuotes.ViewModels
         public async Task OnAppearing()
         {
             var quote = await HttpService.GetQuote(QuoteId);
-            var movie = await HttpService.GetMovie(quote.Movie);
+            Movie = await HttpService.GetMovie(quote.Movie);
         }
 
         private string quoteId;
@@ -24,6 +25,13 @@ namespace LordOfQuotes.ViewModels
             {
                 quoteId = value;
             }
+        }
+
+        private Movie _movie;
+        public Movie Movie
+        {
+            get => _movie;
+            set => SetProperty(ref _movie, value);
         }
     }
 }

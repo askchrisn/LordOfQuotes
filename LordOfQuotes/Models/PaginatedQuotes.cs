@@ -10,7 +10,7 @@ namespace LordOfQuotes.Models
         public int Page { get; set; }
         public int TotalPages { get; set; }
 
-        public PaginatedQuotes(Root dto)
+        public PaginatedQuotes(QuoteListDto dto)
         {
             Quotes = new List<Quote>();
             foreach (var quoteDto in dto.docs)
