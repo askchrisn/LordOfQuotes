@@ -12,6 +12,7 @@ namespace LordOfQuotes.ViewModels
         {
             var quote = await HttpService.GetQuote(QuoteId);
             Movie = await HttpService.GetMovie(quote.Movie);
+            Character = await HttpService.GetCharacter(quote.Character);
         }
 
         private string quoteId;
@@ -32,6 +33,13 @@ namespace LordOfQuotes.ViewModels
         {
             get => _movie;
             set => SetProperty(ref _movie, value);
+        }
+
+        private Character _character;
+        public Character Character
+        {
+            get => _character;
+            set => SetProperty(ref _character, value);
         }
     }
 }

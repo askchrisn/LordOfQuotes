@@ -5,14 +5,28 @@
     x:Class="LordOfQuotes.Views.QuoteDetailView">
     <ContentPage.Content>
 
-        <StackLayout BackgroundColor="Yellow">
-            <Label Text="{Binding Movie.Name}"></Label>
-            <Label Text="{Binding Movie.RuntimeInMinutes}"></Label>
-            <Label Text="{Binding Movie.BudgetInMillions}"></Label>
-            <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}"></Label>
-            <Label Text="{Binding Movie.AcademyAwardNominations}"></Label>
-            <Label Text="{Binding Movie.AcademyAwardWins}"></Label>
-            <Label Text="{Binding Movie.RottenTomatoesScore}"></Label>
+        <StackLayout>
+            <StackLayout BackgroundColor="Yellow">
+                <Label Text="{Binding Movie.Name}"></Label>
+                <Label Text="{Binding Movie.RuntimeInMinutes}"></Label>
+                <Label Text="{Binding Movie.BudgetInMillions}"></Label>
+                <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}"></Label>
+                <Label Text="{Binding Movie.AcademyAwardNominations}"></Label>
+                <Label Text="{Binding Movie.AcademyAwardWins}"></Label>
+                <Label Text="{Binding Movie.RottenTomatoesScore}"></Label>
+            </StackLayout>
+
+            <StackLayout BackgroundColor="LightBlue">
+                <Label Text="{Binding Character.Height}"></Label>
+                <Label Text="{Binding Character.Race}"></Label>
+                <Label Text="{Binding Character.Gender}"></Label>
+                <Label Text="{Binding Character.Birth}"></Label>
+                <Label Text="{Binding Character.Spouse}"></Label>
+                <Label Text="{Binding Character.Death}"></Label>
+                <Label Text="{Binding Character.Realm}"></Label>
+                <Label Text="{Binding Character.Hair}"></Label>
+                <Label Text="{Binding Character.Name}"></Label>
+            </StackLayout>
         </StackLayout>
 
     </ContentPage.Content>

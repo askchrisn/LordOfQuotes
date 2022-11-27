@@ -10,5 +10,6 @@ namespace LordOfQuotes.Services
         Task<PaginatedQuotes> GetQuotes();
         Task<Quote> GetQuote(string quoteId);
         Task<Movie> GetMovie(string movieId);
+        Task<Character> GetCharacter(string characterId);
     }
 }
