@@ -4,22 +4,27 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LordOfQuotes.Models;
 using LordOfQuotes.Services;
+using Newtonsoft.Json;
 using Xamarin.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LordOfQuotes.ViewModels
 {
-    [QueryProperty(nameof(QuoteId), nameof(QuoteId))]
+    [QueryProperty(nameof(SerializedQuote), nameof(SerializedQuote))]
     public class QuoteDetailViewModel : BaseViewModel
     {
+        private Quote QuoteToRemove { get; set; }
+
         public QuoteDetailViewModel()
         {
+            Datacache = App.ServiceProvider.GetService<IPaginatedDatacache>();
         }
 
         public async Task OnAppearing()
         {
-            var quote = await HttpService.GetQuote(QuoteId);
-            Movie = await HttpService.GetMovie(quote.Movie);
-            Character = await HttpService.GetCharacter(quote.Character);
+            QuoteToRemove = JsonConvert.DeserializeObject<Quote>(SerializedQuote);
+            Movie = await HttpService.GetMovie(QuoteToRemove.Movie);
+            Character = await HttpService.GetCharacter(QuoteToRemove.Character);
         }
 
         public ICommand RemoveQuoteCommand => new Command(async () => await RemoveQuote());
@@ -27,7 +32,7 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                MarkQuoteAsRead(quote);
+                Datacache.RemoveQuote(QuoteToRemove);
             }
             catch (Exception ex)
             {
@@ -35,16 +40,16 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        private string quoteId;
-        public string QuoteId
+        private string serializedQuote;
+        public string SerializedQuote
         {
             get
             {
-                return quoteId;
+                return serializedQuote;
             }
             set
             {
-                quoteId = value;
+                serializedQuote = value;
             }
         }
 
@@ -60,6 +65,13 @@ namespace LordOfQuotes.ViewModels
         {
             get => _character;
             set => SetProperty(ref _character, value);
+        }
+
+        private IPaginatedDatacache _datacache;
+        public IPaginatedDatacache Datacache
+        {
+            get => _datacache;
+            set => SetProperty(ref _datacache, value);
         }
     }
 }

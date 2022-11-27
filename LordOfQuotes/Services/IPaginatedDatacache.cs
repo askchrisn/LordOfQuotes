@@ -5,11 +5,12 @@ using LordOfQuotes.Models;
 
 namespace LordOfQuotes.Services
 {
-    public interface IDatacache
+    public interface IPaginatedDatacache
     {
+        int PageNumber { get; }
+        int PageLimit { get; }
         ObservableCollection<Quote> Quotes { get; }
         void SetDatacache(List<Quote> quotes, int itemsPerPage);
-        int GetTotalQuoteCount();
         void RemoveQuote(Quote quote);
         void AddNewQuote();
         void PreviousQuotes();

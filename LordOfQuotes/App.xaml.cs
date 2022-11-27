@@ -37,7 +37,7 @@ namespace LordOfQuotes
             // SERVICES
 
             // SINGLETON SERVICES
-            services.AddSingleton<IDatacache, Datacache>();
+            services.AddSingleton<IPaginatedDatacache, PaginatedDatacache>();
             services.AddSingleton<IHttpService, HttpService>();
 
             // VIEW MODELS

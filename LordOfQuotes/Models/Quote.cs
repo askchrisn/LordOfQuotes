@@ -1,5 +1,6 @@
 ﻿using System;
 using LordOfQuotes.Dtos;
+using Newtonsoft.Json;
 
 namespace LordOfQuotes.Models
 {
@@ -9,6 +10,11 @@ namespace LordOfQuotes.Models
         public string Dialog { get; set; }
         public string Movie { get; set; }
         public string Character { get; set; }
+
+        public Quote()
+        {
+            
+        }
 
         public Quote(QuoteDto dto)
         {

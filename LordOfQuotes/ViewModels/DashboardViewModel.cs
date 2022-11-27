@@ -8,8 +8,11 @@ using LordOfQuotes.Models;
 using LordOfQuotes.Services;
 using LordOfQuotes.Services.DataServices;
 using LordOfQuotes.Views;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace LordOfQuotes.ViewModels
 {
@@ -17,23 +20,14 @@ namespace LordOfQuotes.ViewModels
     {
         public DashboardViewModel()
         {
+            Datacache = App.ServiceProvider.GetService<IPaginatedDatacache>();
             GetAllQuotes();
-        }
-
-        public async Task OnAppearing()
-        {
-            //var paginatedQuotes = await HttpService.GetQuotes();
-            //Datacache = new Datacache();
-            //Datacache.SetDatacache(paginatedQuotes.Quotes, 10);
-            //PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
         private async void GetAllQuotes()
         {
             var paginatedQuotes = await HttpService.GetQuotes();
-            Datacache = new Datacache();
             Datacache.SetDatacache(paginatedQuotes.Quotes, 10);
-            PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
         public ICommand RemoveQuoteCommand => new Command<Quote>(async (quote) => await RemoveQuote(quote));
@@ -41,7 +35,7 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                MarkQuoteAsRead(quote);
+                Datacache.RemoveQuote(quote);
             }
             catch (Exception ex)
             {
@@ -55,11 +49,9 @@ namespace LordOfQuotes.ViewModels
             try
             {
                 // if on first page return
-                if (PageNumber <= 1) return;
+                if (Datacache.PageNumber <= 1) return;
 
-                PageNumber--;
                 Datacache.PreviousQuotes();
-                PaginationString = $"{PageNumber} of {PageLimit}";
             }
             catch (Exception ex)
             {
@@ -73,11 +65,9 @@ namespace LordOfQuotes.ViewModels
             try
             {
                 // if last page return
-                if (PageNumber >= PageLimit) return;
+                if (Datacache.PageNumber >= Datacache.PageLimit) return;
 
-                PageNumber++;
                 Datacache.NextQuotes();
-                PaginationString = $"{PageNumber} of {PageLimit}";
             }
             catch (Exception ex)
             {
@@ -90,12 +80,20 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                await Shell.Current.GoToAsync($"{nameof(QuoteDetailView)}?{nameof(QuoteDetailViewModel.QuoteId)}={quote.Id}");
+                var serializedQuote = JsonConvert.SerializeObject(quote);
+                await Shell.Current.GoToAsync($"{nameof(QuoteDetailView)}?{nameof(QuoteDetailViewModel.SerializedQuote)}={serializedQuote}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        private IPaginatedDatacache _datacache;
+        public IPaginatedDatacache Datacache
+        {
+            get => _datacache;
+            set => SetProperty(ref _datacache, value);
         }
     }
 }

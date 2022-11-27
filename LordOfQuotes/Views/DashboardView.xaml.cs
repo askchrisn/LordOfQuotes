@@ -19,7 +19,7 @@ namespace LordOfQuotes.Views
 
         protected override async void OnAppearing()
         {
-            await vm.OnAppearing();
+            //await vm.OnAppearing();
         }
     }
 }
