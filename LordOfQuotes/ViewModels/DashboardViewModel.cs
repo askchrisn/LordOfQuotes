@@ -14,12 +14,9 @@ namespace LordOfQuotes.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        private int IndexOfTopOfPage;
-        private List<Quote> AllQuotes = new List<Quote>();
-
         public DashboardViewModel()
         {
-            GetAllQuotes();
+            InitializeData();
         }
 
         public ICommand PageDownCommand { get => new Command(async () => await PageDown()); }
@@ -27,10 +24,11 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                if (PageNumber == 1) return;
+                // if on first page return
+                if (Datacache.PageNumber <= 1) return;
 
-                PageNumber--;
-                SetPagination(false);
+                Datacache.PreviousQuotes();
+                PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
             }
             catch (Exception ex)
             {
@@ -43,10 +41,11 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                if (PageNumber >= CalculateLastPage()) return;
+                // if last page return
+                if (Datacache.PageNumber >= Datacache.PageLimit) return;
 
-                PageNumber++;
-                SetPagination(true);
+                Datacache.NextQuotes();
+                PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
             }
             catch (Exception ex)
             {
@@ -59,22 +58,15 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                AllQuotes.Remove(quote);
-                Quotes.Remove(quote);
+                Datacache.RemoveQuote(quote);
+                Datacache.AddNewQuote();
 
-                if (!Quotes.Any())
+                if (!Datacache.Quotes.Any())
                 {
-                    PageDown();
-                    return;
+                    Datacache.PreviousQuotes();
                 }
 
-                if(IndexOfTopOfPage + 9 < AllQuotes.Count)
-                {
-                    Quotes.Add(AllQuotes.ElementAt(IndexOfTopOfPage + 9));
-                }
-
-                var maxPageNumber = CalculateLastPage();
-                PaginationString = $"{PageNumber} of {maxPageNumber}";
+                PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
             }
             catch (Exception ex)
             {
@@ -82,51 +74,18 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        private async void GetAllQuotes()
+        private async void InitializeData()
         {
-            var paginatedQuotes = await HttpService.GetQuotes(PageNumber);
-            AllQuotes = paginatedQuotes.Quotes;
-            SetPagination(true);
+            var paginatedQuotes = await HttpService.GetQuotes();
+            Datacache = new Datacache(paginatedQuotes.Quotes, 10);
+            PaginationString = $"{Datacache.PageNumber} of {Datacache.PageLimit}";
         }
 
-        private void SetPagination(bool forward)
+        private IDatacache _datacache;
+        public IDatacache Datacache
         {
-            // Get the next index that is needed
-            IndexOfTopOfPage = AllQuotes.IndexOf(Quotes.LastOrDefault())+1;
-
-            if(!forward)
-            {
-                // Get the index of 20 back and take the next 10 to go back 10
-                IndexOfTopOfPage = IndexOfTopOfPage - 20 > 0 ? IndexOfTopOfPage - 20 : 0; 
-            }
-
-            var subsetOfQuotes = AllQuotes.Skip(IndexOfTopOfPage).Take(10);
-            Quotes = new ObservableCollection<Quote>(subsetOfQuotes);
-
-            var maxPageNumber = CalculateLastPage();
-            PaginationString = $"{PageNumber} of {maxPageNumber}";
-        }
-
-        private decimal CalculateLastPage()
-        {
-            decimal amountCount = (decimal)AllQuotes.Count() / (decimal)10;
-            var maxPageNumber = Math.Ceiling(amountCount);
-
-            return maxPageNumber;
-        }
-
-        private ObservableCollection<Quote> _quotes = new ObservableCollection<Quote>();
-        public ObservableCollection<Quote> Quotes
-        {
-            get => _quotes;
-            set => SetProperty(ref _quotes, value);
-        }
-
-        private int _pageNumber = 1;
-        public int PageNumber
-        {
-            get { return _pageNumber; }
-            set { SetProperty(ref _pageNumber, value); }
+            get => _datacache;
+            set => SetProperty(ref _datacache, value);
         }
 
         private string _paginationString;

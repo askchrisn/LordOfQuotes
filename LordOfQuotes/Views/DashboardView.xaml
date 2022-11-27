@@ -9,13 +9,13 @@
 
     <StackLayout Padding="10">
         <ScrollView VerticalOptions="FillAndExpand">
-            <StackLayout BindableLayout.ItemsSource="{Binding Quotes}">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <templates:QuoteTemplate ParentContext="{Binding BindingContext, Source={x:Reference DashboardViewPage}}"/>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </StackLayout>
+            <StackLayout BindableLayout.ItemsSource="{Binding Datacache.Quotes}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <templates:QuoteTemplate ParentContext="{Binding BindingContext, Source={x:Reference DashboardViewPage}}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
         </ScrollView>
 
         <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
