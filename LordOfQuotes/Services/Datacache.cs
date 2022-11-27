@@ -35,6 +35,8 @@ namespace LordOfQuotes.Services
         public void AddNewQuote()
         {
             var nextIndex = AllQuotes.IndexOf(Quotes.LastOrDefault())+1;
+
+            // if there are no more quotes to add, return
             if (nextIndex >= AllQuotes.Count - 1) return;
 
             Quotes.Add(AllQuotes[nextIndex]);

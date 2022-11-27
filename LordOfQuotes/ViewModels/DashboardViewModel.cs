@@ -7,6 +7,7 @@ using System.Windows.Input;
 using LordOfQuotes.Models;
 using LordOfQuotes.Services;
 using LordOfQuotes.Services.DataServices;
+using LordOfQuotes.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -19,9 +20,11 @@ namespace LordOfQuotes.ViewModels
         private int PageNumber { get; set; } = 1;
         private int PageLimit => (int)Math.Ceiling(Datacache.GetTotalQuoteCount() / ITEMSPERPAGE);
 
-        public DashboardViewModel()
+        public async Task OnAppearing()
         {
-            InitializeData();
+            var paginatedQuotes = await HttpService.GetQuotes();
+            Datacache = new Datacache(paginatedQuotes.Quotes, 10);
+            PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
         public ICommand PageDownCommand { get => new Command(async () => await PageDown()); }
@@ -81,11 +84,17 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        private async void InitializeData()
+        public ICommand GoToQuoteCommand => new Command<Quote>(async (quote) => await GoToQuote(quote));
+        private async Task GoToQuote(Quote quote)
         {
-            var paginatedQuotes = await HttpService.GetQuotes();
-            Datacache = new Datacache(paginatedQuotes.Quotes, 10);
-            PaginationString = $"{PageNumber} of {PageLimit}";
+            try
+            {
+                await Shell.Current.GoToAsync($"{nameof(QuoteDetailView)}?{nameof(QuoteDetailViewModel.QuoteId)}={quote.Id}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private IDatacache _datacache;

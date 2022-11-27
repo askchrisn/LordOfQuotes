@@ -37,5 +37,12 @@ namespace LordOfQuotes.Views.Templates
             }
         }
 
+        void GoToQuoteClicked(System.Object sender, System.EventArgs e)
+        {
+            if (this.ParentContext is DashboardViewModel dvm)
+            {
+                dvm.GoToQuoteCommand.Execute(this.BindingContext);
+            }
+        }
     }
 }

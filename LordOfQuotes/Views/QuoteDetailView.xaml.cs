@@ -5,14 +5,14 @@ using Xamarin.Forms;
 
 namespace LordOfQuotes.Views
 {
-    public partial class DashboardView : ContentPage
+    public partial class QuoteDetailView : ContentPage
     {
-        DashboardViewModel vm;
+        QuoteDetailViewModel vm;
 
-        public DashboardView()
+        public QuoteDetailView()
         {
             InitializeComponent();
-            vm = App.ServiceProvider.GetService(typeof(DashboardViewModel)) as DashboardViewModel;
+            vm = App.ServiceProvider.GetService(typeof(QuoteDetailViewModel)) as QuoteDetailViewModel;
 
             this.BindingContext = vm;
         }

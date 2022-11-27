@@ -37,6 +37,7 @@ namespace LordOfQuotes
             // VIEW MODELS
             services.AddTransient<BaseViewModel>();
             services.AddTransient<DashboardViewModel>();
+            services.AddTransient<QuoteDetailViewModel>();
 
             // SERVICES
 

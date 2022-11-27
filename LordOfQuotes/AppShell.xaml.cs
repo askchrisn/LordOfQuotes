@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using LordOfQuotes.Views;
 using Xamarin.Forms;
 
 namespace LordOfQuotes
@@ -11,6 +11,9 @@ namespace LordOfQuotes
         {
             InitializeComponent();
             this.BindingContext = this;
+
+            // REGISTER SCREENS HERE
+            Routing.RegisterRoute(nameof(QuoteDetailView), typeof(QuoteDetailView));
         }
     }
 }
