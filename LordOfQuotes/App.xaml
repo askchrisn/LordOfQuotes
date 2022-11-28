@@ -13,13 +13,21 @@
             <Color x:Key="Darker">#1a1f25</Color>
 
             <Style TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="Small" />
                 <Setter Property="TextColor" Value="{StaticResource DarkGray}" />
             </Style>
 
-            <Style x:Key="PaginationButton" TargetType="Button">
+            <Style TargetType="{x:Type Button}">
                 <Setter Property="BackgroundColor" Value="{StaticResource DarkGray}"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="Padding" Value="20,15"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
+
+            <!--<Style x:Key="LabelQuote" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+            </Style>-->
 
             <Style x:Key="LabelHeader" TargetType="Label">
                 <Setter Property="FontSize" Value="Header"></Setter>

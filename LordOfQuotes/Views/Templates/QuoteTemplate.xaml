@@ -5,15 +5,17 @@
     x:Class="LordOfQuotes.Views.Templates.QuoteTemplate">
     <ContentView.Content>
 
-        <StackLayout BackgroundColor="LightBlue" Orientation="Horizontal" Padding="10" HeightRequest="60" >
-            <Label Text="{Binding Dialog}" VerticalOptions="CenterAndExpand"></Label>
-            <Button Text="Read" Clicked="RemoveQuoteClicked" BackgroundColor="Green" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"></Button>
+        <StackLayout BackgroundColor="{StaticResource LightGray}" Orientation="Horizontal" Padding="10" HeightRequest="60" >
+
+            <Label Text="{Binding Dialog}" TextColor="Black" VerticalOptions="CenterAndExpand"></Label>
+            <Button Text="READ" Clicked="RemoveQuoteClicked" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"></Button>
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer 
                     NumberOfTapsRequired="1"
                     Tapped="GoToQuoteClicked">
                 </TapGestureRecognizer>
             </StackLayout.GestureRecognizers>
+
         </StackLayout>
 
     </ContentView.Content>

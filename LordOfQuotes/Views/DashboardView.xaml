@@ -8,6 +8,9 @@
     x:Name="DashboardViewPage">
 
     <StackLayout Padding="10">
+
+        <Label Text="FAMOUS LORD OF THE RINGS QUOTES" FontAttributes="Bold" TextColor="Black" FontSize="Header" Margin="0,-10,0,10" HorizontalOptions="CenterAndExpand"></Label>
+
         <ScrollView VerticalOptions="FillAndExpand">
             <StackLayout BindableLayout.ItemsSource="{Binding Datacache.Quotes}">
                 <BindableLayout.ItemTemplate>
@@ -19,19 +22,9 @@
         </ScrollView>
 
         <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
-            <Button
-                Text="Left"
-                Command="{Binding PageDownCommand}"
-                Style="{StaticResource PaginationButton}">
-            </Button>
-
-            <Label Text="{Binding Datacache.PaginationString}" FontSize="Medium"></Label>
-
-            <Button
-                Text="Right"
-                Command="{Binding PageUpCommand}"
-                Style="{StaticResource PaginationButton}">
-            </Button>
+            <Button Text="Down" Command="{Binding PageDownCommand}"></Button>
+            <Label Text="{Binding Datacache.PaginationString}" FontSize="Medium" TextColor="Black" VerticalOptions="CenterAndExpand" Padding="10"></Label>
+            <Button Text="Up" Command="{Binding PageUpCommand}"></Button>
         </StackLayout>
 
     </StackLayout>

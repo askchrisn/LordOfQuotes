@@ -19,90 +19,90 @@
                 <Label Text="{Binding Movie.Name}" TextColor="Black"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Tomatio Score:" FontSize="Small"/>
-                    <Label Text="{Binding Movie.RottenTomatoesScore}" FontSize="Small"/>
+                    <Label Text="Tomatio Score:" />
+                    <Label Text="{Binding Movie.RottenTomatoesScore}" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Runtime:" FontSize="Small"/>
-                    <Label Text="{Binding Movie.RuntimeInMinutes}" FontSize="Small"/>
-                    <Label Text="minutes" FontSize="Small"/>
+                    <Label Text="Runtime:" />
+                    <Label Text="{Binding Movie.RuntimeInMinutes}" />
+                    <Label Text="minutes" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Budget:" FontSize="Small"/>
-                    <Label Text="{Binding Movie.BudgetInMillions}" FontSize="Small"/>
-                    <Label Text="million" FontSize="Small"/>
+                    <Label Text="Budget:" />
+                    <Label Text="{Binding Movie.BudgetInMillions}" />
+                    <Label Text="million" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Box Office:" FontSize="Small"/>
-                    <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}" FontSize="Small"/>
-                    <Label Text="million" FontSize="Small"/>
+                    <Label Text="Box Office:" />
+                    <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}" />
+                    <Label Text="million" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Academy Award Nominations:" FontSize="Small"/>
-                    <Label Text="{Binding Movie.AcademyAwardNominations}" FontSize="Small"/>
+                    <Label Text="Academy Award Nominations:" />
+                    <Label Text="{Binding Movie.AcademyAwardNominations}" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Academy Award Wins:" FontSize="Small"/>
-                    <Label Text="{Binding Movie.AcademyAwardWins}" FontSize="Small"/>
+                    <Label Text="Academy Award Wins:" />
+                    <Label Text="{Binding Movie.AcademyAwardWins}" />
                 </StackLayout>
             </StackLayout>
 
                     <StackLayout Padding="15,10">
-                <Label Text="About the character" Style="{StaticResource LabelDetailHeader}" Margin="0,10,0,0"/>
-                <Label Text="{Binding Character.Name}" TextColor="Black"/>
+                        <Label Text="About the character" Style="{StaticResource LabelDetailHeader}"/>
+                        <Label Text="{Binding Character.Name}" FontSize="Medium" TextColor="Black"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50*" />
-                        <ColumnDefinition  Width="50*" />
-                    </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition  Width="50*" />
+                            </Grid.ColumnDefinitions>
 
-                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                        <Label Text="Height:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Height}" FontSize="Small"/>
+                            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                <Label Text="Height:" />
+                                <Label Text="{Binding Character.Height}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                <Label Text="Race:" />
+                                <Label Text="{Binding Character.Race}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                <Label Text="Gender:" />
+                                <Label Text="{Binding Character.Gender}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                <Label Text="Hair:" />
+                                <Label Text="{Binding Character.Hair}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                                <Label Text="Birth:" />
+                                <Label Text="{Binding Character.Birth}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                <Label Text="Death:" />
+                                <Label Text="{Binding Character.Death}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                                <Label Text="Spouse:" />
+                                <Label Text="{Binding Character.Spouse}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                <Label Text="Realm:" />
+                                <Label Text="{Binding Character.Realm}" />
+                            </StackLayout>
+                        </Grid>
                     </StackLayout>
-
-                    <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                        <Label Text="Race:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Race}" FontSize="Small"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                        <Label Text="Gender:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Gender}" FontSize="Small"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <Label Text="Hair:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Hair}" FontSize="Small"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                        <Label Text="Birth:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Birth}" FontSize="Small"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                        <Label Text="Death:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Death}" FontSize="Small"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
-                        <Label Text="Spouse:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Spouse}" FontSize="Small"/>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                        <Label Text="Realm:" FontSize="Small"/>
-                        <Label Text="{Binding Character.Realm}" FontSize="Small"/>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>
                 </StackLayout>
             </ScrollView>
 
