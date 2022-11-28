@@ -15,17 +15,11 @@ namespace LordOfQuotes.Services.DataServices
 
         public ApiServiceBase()
         {
+            // should have been read in from DB connection of sorts
             authKey = "ArKxecgybWqdt767qKpB";
             baseUrl = "the-one-api.dev/";
 
             client = new HttpClient();
-
-            //#if DEBUG
-            //    //var httpHandlerService = App.ServiceProvider.GetService(typeof(IHttpHandlerService)) as IHttpHandlerService;
-            //    //client = new HttpClient(httpHandlerService.GetHttpHandler());
-            //#else
-            //    client = new HttpClient();
-            //#endif
         }
 
         public async Task<TApiResult> GetAsync<TApiResult>(string url)

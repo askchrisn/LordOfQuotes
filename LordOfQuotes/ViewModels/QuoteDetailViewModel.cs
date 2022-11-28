@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LordOfQuotes.ViewModels
 {
-    [QueryProperty(nameof(SerializedQuote), nameof(SerializedQuote))]
+    [QueryProperty(nameof(QuoteId), nameof(QuoteId))]
     public class QuoteDetailViewModel : BaseViewModel
     {
         public QuoteDetailViewModel(IPaginatedDatacache paginatedDatacache)
@@ -20,9 +20,18 @@ namespace LordOfQuotes.ViewModels
 
         public async Task OnAppearing()
         {
-            Quote = JsonConvert.DeserializeObject<Quote>(SerializedQuote);
-            Movie = await HttpService.GetMovie(Quote.Movie);
-            Character = await HttpService.GetCharacter(Quote.Character);
+            try
+            {
+                // shell breaking serialization because too long
+                // pass quote id and get it again
+                Quote = await HttpService.GetQuote(QuoteId);
+                Movie = await HttpService.GetMovie(QuoteId);
+                Character = await HttpService.GetCharacter(QuoteId);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         public ICommand RemoveQuoteCommand => new Command(async () => await RemoveQuote());
@@ -39,16 +48,16 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        private string serializedQuote;
-        public string SerializedQuote
+        private string quoteId;
+        public string QuoteId
         {
             get
             {
-                return serializedQuote;
+                return quoteId;
             }
             set
             {
-                serializedQuote = value;
+                quoteId = value;
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using LordOfQuotes.ViewModels;
 using Xamarin.Forms;
 
@@ -12,7 +13,7 @@ namespace LordOfQuotes.Views
         public QuoteDetailView()
         {
             InitializeComponent();
-            vm = App.ServiceProvider.GetService(typeof(QuoteDetailViewModel)) as QuoteDetailViewModel;
+            vm = App.ServiceProvider.GetService<QuoteDetailViewModel>();
 
             this.BindingContext = vm;
         }

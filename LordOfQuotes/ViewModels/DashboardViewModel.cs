@@ -80,8 +80,7 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                var serializedQuote = JsonConvert.SerializeObject(quote);
-                await Shell.Current.GoToAsync($"{nameof(QuoteDetailView)}?{nameof(QuoteDetailViewModel.SerializedQuote)}={serializedQuote}");
+                await Shell.Current.GoToAsync($"{nameof(QuoteDetailView)}?{nameof(QuoteDetailViewModel.QuoteId)}={quote.Id}");
             }
             catch (Exception ex)
             {

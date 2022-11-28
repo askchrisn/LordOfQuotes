@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LordOfQuotes.ViewModels;
 using Xamarin.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LordOfQuotes.Views
 {
@@ -12,7 +13,7 @@ namespace LordOfQuotes.Views
         public DashboardView()
         {
             InitializeComponent();
-            vm = App.ServiceProvider.GetService(typeof(DashboardViewModel)) as DashboardViewModel;
+            vm = App.ServiceProvider.GetService<DashboardViewModel>();
 
             this.BindingContext = vm;
         }

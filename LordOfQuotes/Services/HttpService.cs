@@ -11,57 +11,26 @@ namespace LordOfQuotes.Services
     {
         public async Task<PaginatedQuotes> GetQuotes()
         {
-            try
-            {
-                var dto = await GetAsync<QuoteListDto>($"v2/quote?limit=20").ConfigureAwait(false);
-                return new PaginatedQuotes(dto);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return new PaginatedQuotes();
-            }
+            var dto = await GetAsync<QuoteListDto>($"v2/quote?limit=20");
+            return new PaginatedQuotes(dto);
         }
 
         public async Task<Quote> GetQuote(string quoteId)
         {
-            try
-            {
-                var dto = await GetAsync<QuoteListDto>($"v2/quote/{quoteId}").ConfigureAwait(false);
-                return new Quote(dto.docs[0]);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return new Quote();
-            }
+            var dto = await GetAsync<QuoteListDto>($"v2/quote/{quoteId}");
+            return new Quote(dto.docs[0]);
         }
 
         public async Task<Movie> GetMovie(string movieId)
         {
-            try
-            {
-                var dto = await GetAsync<MovieListDto>($"v2/movie/{movieId}").ConfigureAwait(false);
-                return new Movie(dto.docs[0]);
-            }
-            catch(Exception ex)
-            {
-                return new Movie();
-            }
+            var dto = await GetAsync<MovieListDto>($"v2/movie/{movieId}");
+            return new Movie(dto.docs[0]);
         }
 
         public async Task<Character> GetCharacter(string characterId)
         {
-            try
-            {
-                var dto = await GetAsync<CharacterListDto>($"v2/character/{characterId}").ConfigureAwait(false);
-                return new Character(dto.docs[0]);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-                return new Character();
-            }
+            var dto = await GetAsync<CharacterListDto>($"v2/character/{characterId}");
+            return new Character(dto.docs[0]);
         }
     }
 }
