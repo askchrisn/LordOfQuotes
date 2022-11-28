@@ -18,9 +18,9 @@ namespace LordOfQuotes.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        public DashboardViewModel()
+        public DashboardViewModel(IPaginatedDatacache paginatedDatacache)
         {
-            Datacache = App.ServiceProvider.GetService<IPaginatedDatacache>();
+            Datacache = paginatedDatacache;
             GetAllQuotes();
         }
 

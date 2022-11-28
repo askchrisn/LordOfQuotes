@@ -13,18 +13,16 @@ namespace LordOfQuotes.ViewModels
     [QueryProperty(nameof(SerializedQuote), nameof(SerializedQuote))]
     public class QuoteDetailViewModel : BaseViewModel
     {
-        private Quote QuoteToRemove { get; set; }
-
-        public QuoteDetailViewModel()
+        public QuoteDetailViewModel(IPaginatedDatacache paginatedDatacache)
         {
-            Datacache = App.ServiceProvider.GetService<IPaginatedDatacache>();
+            Datacache = paginatedDatacache;
         }
 
         public async Task OnAppearing()
         {
-            QuoteToRemove = JsonConvert.DeserializeObject<Quote>(SerializedQuote);
-            Movie = await HttpService.GetMovie(QuoteToRemove.Movie);
-            Character = await HttpService.GetCharacter(QuoteToRemove.Character);
+            Quote = JsonConvert.DeserializeObject<Quote>(SerializedQuote);
+            Movie = await HttpService.GetMovie(Quote.Movie);
+            Character = await HttpService.GetCharacter(Quote.Character);
         }
 
         public ICommand RemoveQuoteCommand => new Command(async () => await RemoveQuote());
@@ -32,7 +30,7 @@ namespace LordOfQuotes.ViewModels
         {
             try
             {
-                Datacache.RemoveQuote(QuoteToRemove);
+                Datacache.RemoveQuote(Quote);
                 Shell.Current.SendBackButtonPressed();
             }
             catch (Exception ex)
@@ -52,6 +50,13 @@ namespace LordOfQuotes.ViewModels
             {
                 serializedQuote = value;
             }
+        }
+
+        private Quote _quote;
+        public Quote Quote
+        {
+            get => _quote;
+            set => SetProperty(ref _quote, value);
         }
 
         private Movie _movie;

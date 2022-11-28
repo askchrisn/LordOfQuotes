@@ -13,13 +13,13 @@ namespace LordOfQuotes.Models
 
         public Quote()
         {
-            
+
         }
 
         public Quote(QuoteDto dto)
         {
             Id = dto.id;
-            Dialog = dto.dialog;
+            Dialog = $"'{dto.dialog}'";
             Movie = dto.movie;
             Character = dto.character;
         }
