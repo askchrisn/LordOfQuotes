@@ -16,10 +16,5 @@ namespace LordOfQuotes.Views
 
             this.BindingContext = vm;
         }
-
-        protected override async void OnAppearing()
-        {
-            //await vm.OnAppearing();
-        }
     }
 }

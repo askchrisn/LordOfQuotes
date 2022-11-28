@@ -14,6 +14,8 @@ namespace LordOfQuotes.Models
         public int AcademyAwardWins { get; set; }
         public int RottenTomatoesScore { get; set; }
 
+        public Movie() { }
+
         public Movie(MovieDto dto)
         {
             Id = dto._id;

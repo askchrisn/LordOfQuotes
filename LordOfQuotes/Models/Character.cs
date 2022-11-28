@@ -17,6 +17,8 @@ namespace LordOfQuotes.Models
         public string Name { get; set; }
         public string WikiUrl { get; set; }
 
+        public Character() { }
+
         public Character(CharacterDto dto)
         {
             Id = dto._id;
