@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LordOfQuotes.Models;
 using LordOfQuotes.Services;
-using Newtonsoft.Json;
 using Xamarin.Forms;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace LordOfQuotes.ViewModels
 {

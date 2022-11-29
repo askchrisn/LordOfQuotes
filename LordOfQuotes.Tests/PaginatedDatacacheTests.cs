@@ -57,6 +57,23 @@ namespace LordOfQuotes.Tests
         }
 
         [Fact]
+        public void RemoveFromDatacache_RemoveLastQuoteNoAdd()
+        {
+            // ARRANGE
+            var quoteToRemove = paginatedDatacache.Quotes[4];
+            paginatedDatacache.NextQuotes();
+
+            // TEST
+            var isSuccess = paginatedDatacache.RemoveQuote(quoteToRemove);
+
+            // ASSERT
+            Assert.True(isSuccess);
+            Assert.Single(paginatedDatacache.Quotes);
+            Assert.Equal("Quote3!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("2 of 2", paginatedDatacache.PaginationString);
+        }
+
+        [Fact]
         public void RemoveFromDatacache_Fails()
         {
             // ARRANGE
@@ -68,6 +85,35 @@ namespace LordOfQuotes.Tests
             // ASSERT
             Assert.False(isSuccess);
             Assert.Equal("Quote1!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
+        }
+
+        [Fact]
+        public void NextQuotes_GoesToNextPage()
+        {
+            // ARRANGE
+
+            // TEST
+            paginatedDatacache.NextQuotes();
+
+            // ASSERT
+            Assert.Equal("Quote3!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("Quote4!", paginatedDatacache.Quotes[1].Dialog);
+            Assert.Equal("2 of 2", paginatedDatacache.PaginationString);
+        }
+
+        [Fact]
+        public void PrevQuotes_GoesToPreviousPage()
+        {
+            // ARRANGE
+
+            // TEST
+            paginatedDatacache.NextQuotes();
+            paginatedDatacache.PreviousQuotes();
+
+            // ASSERT
+            Assert.Equal("Quote1!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("Quote2!", paginatedDatacache.Quotes[1].Dialog);
             Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
         }
 

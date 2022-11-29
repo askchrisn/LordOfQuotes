@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LordOfQuotes.Models;
 using LordOfQuotes.Services;
-using LordOfQuotes.Services.DataServices;
 using LordOfQuotes.Views;
-using Newtonsoft.Json;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Microsoft.Extensions.DependencyInjection;
-
 
 namespace LordOfQuotes.ViewModels
 {
