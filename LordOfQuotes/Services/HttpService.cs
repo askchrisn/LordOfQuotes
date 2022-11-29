@@ -9,6 +9,7 @@ namespace LordOfQuotes.Services
 {
     public class HttpService : ApiServiceBase, IHttpService
     {
+        // these should be in an app config in real world scenario
         protected override string authKey => "ArKxecgybWqdt767qKpB";
         protected override string baseUrl => "the-one-api.dev/";
 
