@@ -17,7 +17,7 @@ namespace LordOfQuotes.Services
         public void SetDatacache(List<Quote> quotes, int itemsPerPage)
         {
             AllQuotes = quotes;
-            Quotes = new ObservableCollection<Quote>(AllQuotes.Take(itemsPerPage));
+            DisplayQuotes = new ObservableCollection<Quote>(AllQuotes.Take(itemsPerPage));
             ItemsPerPage = itemsPerPage;
             PaginationString = $"{PageNumber} of {PageLimit}";
         }
@@ -28,12 +28,12 @@ namespace LordOfQuotes.Services
             if (identicalQuote == null) return false;
 
             AllQuotes.Remove(identicalQuote);
-            Quotes.Remove(identicalQuote);
+            DisplayQuotes.Remove(identicalQuote);
 
             AddNewQuote();
             PaginationString = $"{PageNumber} of {PageLimit}";
 
-            if (!Quotes.Any())
+            if (!DisplayQuotes.Any())
             {
                 PreviousQuotes();
             }
@@ -45,8 +45,8 @@ namespace LordOfQuotes.Services
         {
             PageNumber++;
             // get index of last quote in list
-            var startIndex = AllQuotes.IndexOf(Quotes.LastOrDefault()) + 1;
-            Quotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
+            var startIndex = AllQuotes.IndexOf(DisplayQuotes.LastOrDefault()) + 1;
+            DisplayQuotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
             PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
@@ -54,19 +54,18 @@ namespace LordOfQuotes.Services
         {
             PageNumber--;
             // get index of first quote in list
-            var startIndex = AllQuotes.IndexOf(Quotes.FirstOrDefault()) - ItemsPerPage;
-            Quotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
+            var startIndex = AllQuotes.IndexOf(DisplayQuotes.FirstOrDefault()) - ItemsPerPage;
+            DisplayQuotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
             PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
         private void AddNewQuote()
         {
-            var nextIndex = AllQuotes.IndexOf(Quotes.LastOrDefault()) + 1;
+            var nextIndex = AllQuotes.IndexOf(DisplayQuotes.LastOrDefault()) + 1;
             // if there are no more quotes to add, return
             if (nextIndex >= AllQuotes.Count) return;
 
-            Quotes.Add(AllQuotes[nextIndex]);
-            return;
+            DisplayQuotes.Add(AllQuotes[nextIndex]);
         }
 
         private List<Quote> CreateSubset(int index)
@@ -77,11 +76,11 @@ namespace LordOfQuotes.Services
             return subset;
         }
 
-        private ObservableCollection<Quote> _quotes = new ObservableCollection<Quote>();
-        public ObservableCollection<Quote> Quotes
+        private ObservableCollection<Quote> _displayQuotes = new ObservableCollection<Quote>();
+        public ObservableCollection<Quote> DisplayQuotes
         {
-            get => _quotes;
-            private set => SetProperty(ref _quotes, value);
+            get => _displayQuotes;
+            private set => SetProperty(ref _displayQuotes, value);
         }
 
         private string _paginationString;

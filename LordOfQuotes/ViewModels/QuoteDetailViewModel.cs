@@ -12,7 +12,7 @@ namespace LordOfQuotes.ViewModels
     {
         public QuoteDetailViewModel(IPaginatedDatacache paginatedDatacache)
         {
-            Datacache = paginatedDatacache;
+            PaginationData = paginatedDatacache;
         }
 
         public async Task OnAppearing()
@@ -31,12 +31,12 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        public ICommand RemoveQuoteCommand => new Command(async () => await RemoveQuote());
-        private async Task RemoveQuote()
+        public ICommand RemoveQuoteCommand => new Command(() => RemoveQuote());
+        private void RemoveQuote()
         {
             try
             {
-                Datacache.RemoveQuote(Quote);
+                PaginationData.RemoveQuote(Quote);
                 Shell.Current.SendBackButtonPressed();
             }
             catch (Exception ex)
@@ -79,11 +79,11 @@ namespace LordOfQuotes.ViewModels
             set => SetProperty(ref _character, value);
         }
 
-        private IPaginatedDatacache _datacache;
-        public IPaginatedDatacache Datacache
+        private IPaginatedDatacache _paginationData;
+        public IPaginatedDatacache PaginationData
         {
-            get => _datacache;
-            set => SetProperty(ref _datacache, value);
+            get => _paginationData;
+            set => SetProperty(ref _paginationData, value);
         }
     }
 }

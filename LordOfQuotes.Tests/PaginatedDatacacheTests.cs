@@ -25,15 +25,15 @@ namespace LordOfQuotes.Tests
         public void RemoveFromDatacache_RemoveAndAddsNextQuote()
         {
             // ARRANGE
-            var quoteToRemove = paginatedDatacache.Quotes[0];
+            var quoteToRemove = paginatedDatacache.DisplayQuotes[0];
 
             // TEST
             var isSuccess = paginatedDatacache.RemoveQuote(quoteToRemove);
 
             // ASSERT
             Assert.True(isSuccess);
-            Assert.Equal("Quote2!", paginatedDatacache.Quotes[0].Dialog);
-            Assert.Equal("Quote3!", paginatedDatacache.Quotes[1].Dialog);
+            Assert.Equal("Quote2!", paginatedDatacache.DisplayQuotes[0].Dialog);
+            Assert.Equal("Quote3!", paginatedDatacache.DisplayQuotes[1].Dialog);
             Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
         }
 
@@ -41,8 +41,8 @@ namespace LordOfQuotes.Tests
         public void RemoveFromDatacache_RemoveAndAddsNextQuoteReducePage()
         {
             // ARRANGE
-            var quoteToRemove1 = paginatedDatacache.Quotes[0];
-            var quoteToRemove2 = paginatedDatacache.Quotes[1];
+            var quoteToRemove1 = paginatedDatacache.DisplayQuotes[0];
+            var quoteToRemove2 = paginatedDatacache.DisplayQuotes[1];
 
             // TEST
             var isSuccess1 = paginatedDatacache.RemoveQuote(quoteToRemove1);
@@ -51,8 +51,8 @@ namespace LordOfQuotes.Tests
             // ASSERT
             Assert.True(isSuccess1);
             Assert.True(isSuccess2);
-            Assert.Equal("Quote3!", paginatedDatacache.Quotes[0].Dialog);
-            Assert.Equal("Quote4!", paginatedDatacache.Quotes[1].Dialog);
+            Assert.Equal("Quote3!", paginatedDatacache.DisplayQuotes[0].Dialog);
+            Assert.Equal("Quote4!", paginatedDatacache.DisplayQuotes[1].Dialog);
             Assert.Equal("1 of 1", paginatedDatacache.PaginationString);
         }
 
@@ -61,15 +61,15 @@ namespace LordOfQuotes.Tests
         {
             // ARRANGE
             paginatedDatacache.NextQuotes();
-            var quoteToRemove = paginatedDatacache.Quotes[0];
+            var quoteToRemove = paginatedDatacache.DisplayQuotes[0];
 
             // TEST
             var isSuccess = paginatedDatacache.RemoveQuote(quoteToRemove);
 
             // ASSERT
             Assert.True(isSuccess);
-            Assert.Single(paginatedDatacache.Quotes);
-            Assert.Equal("Quote4!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Single(paginatedDatacache.DisplayQuotes);
+            Assert.Equal("Quote4!", paginatedDatacache.DisplayQuotes[0].Dialog);
             Assert.Equal("2 of 2", paginatedDatacache.PaginationString);
         }
 
@@ -84,7 +84,7 @@ namespace LordOfQuotes.Tests
 
             // ASSERT
             Assert.False(isSuccess);
-            Assert.Equal("Quote1!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("Quote1!", paginatedDatacache.DisplayQuotes[0].Dialog);
             Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
         }
 
@@ -97,8 +97,8 @@ namespace LordOfQuotes.Tests
             paginatedDatacache.NextQuotes();
 
             // ASSERT
-            Assert.Equal("Quote3!", paginatedDatacache.Quotes[0].Dialog);
-            Assert.Equal("Quote4!", paginatedDatacache.Quotes[1].Dialog);
+            Assert.Equal("Quote3!", paginatedDatacache.DisplayQuotes[0].Dialog);
+            Assert.Equal("Quote4!", paginatedDatacache.DisplayQuotes[1].Dialog);
             Assert.Equal("2 of 2", paginatedDatacache.PaginationString);
         }
 
@@ -112,8 +112,8 @@ namespace LordOfQuotes.Tests
             paginatedDatacache.PreviousQuotes();
 
             // ASSERT
-            Assert.Equal("Quote1!", paginatedDatacache.Quotes[0].Dialog);
-            Assert.Equal("Quote2!", paginatedDatacache.Quotes[1].Dialog);
+            Assert.Equal("Quote1!", paginatedDatacache.DisplayQuotes[0].Dialog);
+            Assert.Equal("Quote2!", paginatedDatacache.DisplayQuotes[1].Dialog);
             Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
         }
 

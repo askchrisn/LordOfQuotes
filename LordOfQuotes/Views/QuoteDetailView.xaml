@@ -15,42 +15,42 @@
             <ScrollView>    
                 <StackLayout>
                     <StackLayout Padding="15,10" >
-                <Label Text="About the movie" Style="{StaticResource LabelDetailHeader}"/>
-                <Label Text="{Binding Movie.Name}" TextColor="Black"/>
+                        <Label Text="About the movie" Style="{StaticResource LabelDetailHeader}"/>
+                        <Label Text="{Binding Movie.Name}" FontSize="Medium" TextColor="Black"/>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Tomatio Score:" />
-                    <Label Text="{Binding Movie.RottenTomatoesScore}" />
-                </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Tomatio Score:" />
+                            <Label Text="{Binding Movie.RottenTomatoesScore}" />
+                        </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Runtime:" />
-                    <Label Text="{Binding Movie.RuntimeInMinutes}" />
-                    <Label Text="minutes" />
-                </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Runtime:" />
+                            <Label Text="{Binding Movie.RuntimeInMinutes}" />
+                            <Label Text="minutes" />
+                        </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Budget:" />
-                    <Label Text="{Binding Movie.BudgetInMillions}" />
-                    <Label Text="million" />
-                </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Budget:" />
+                            <Label Text="{Binding Movie.BudgetInMillions}" />
+                            <Label Text="million" />
+                        </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Box Office:" />
-                    <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}" />
-                    <Label Text="million" />
-                </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Box Office:" />
+                            <Label Text="{Binding Movie.BoxOfficeRevenueInMillions}" />
+                            <Label Text="million" />
+                        </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Academy Award Nominations:" />
-                    <Label Text="{Binding Movie.AcademyAwardNominations}" />
-                </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Academy Award Nominations:" />
+                            <Label Text="{Binding Movie.AcademyAwardNominations}" />
+                        </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Academy Award Wins:" />
-                    <Label Text="{Binding Movie.AcademyAwardWins}" />
-                </StackLayout>
-            </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Academy Award Wins:" />
+                            <Label Text="{Binding Movie.AcademyAwardWins}" />
+                        </StackLayout>
+                    </StackLayout>
 
                     <StackLayout Padding="15,10">
                         <Label Text="About the character" Style="{StaticResource LabelDetailHeader}"/>

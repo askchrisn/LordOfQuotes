@@ -9,7 +9,7 @@ namespace LordOfQuotes.Services
     {
         int PageNumber { get; }
         int PageLimit { get; }
-        ObservableCollection<Quote> Quotes { get; }
+        ObservableCollection<Quote> DisplayQuotes { get; }
         void SetDatacache(List<Quote> quotes, int itemsPerPage);
         bool RemoveQuote(Quote quote);
         void PreviousQuotes();

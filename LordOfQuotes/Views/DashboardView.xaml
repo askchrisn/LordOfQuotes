@@ -12,7 +12,7 @@
         <Label Text="FAMOUS LORD OF THE RINGS QUOTES" FontAttributes="Bold" TextColor="Black" FontSize="Header" Margin="0,-10,0,10" HorizontalOptions="CenterAndExpand"></Label>
 
         <ScrollView VerticalOptions="FillAndExpand">
-            <StackLayout BindableLayout.ItemsSource="{Binding Datacache.Quotes}">
+            <StackLayout BindableLayout.ItemsSource="{Binding PaginationData.DisplayQuotes}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <templates:QuoteTemplate ParentContext="{Binding BindingContext, Source={x:Reference DashboardViewPage}}"/>
@@ -23,7 +23,7 @@
 
         <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
             <Button Text="Down" Command="{Binding PageDownCommand}"></Button>
-            <Label Text="{Binding Datacache.PaginationString}" FontSize="Medium" TextColor="Black" VerticalOptions="CenterAndExpand" Padding="10"></Label>
+            <Label Text="{Binding PaginationData.PaginationString}" FontSize="Medium" TextColor="Black" VerticalOptions="CenterAndExpand" Padding="10"></Label>
             <Button Text="Up" Command="{Binding PageUpCommand}"></Button>
         </StackLayout>
 

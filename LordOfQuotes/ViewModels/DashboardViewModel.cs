@@ -12,22 +12,22 @@ namespace LordOfQuotes.ViewModels
     {
         public DashboardViewModel(IPaginatedDatacache paginatedDatacache)
         {
-            Datacache = paginatedDatacache;
+            PaginationData = paginatedDatacache;
             GetAllQuotes();
         }
 
         private async void GetAllQuotes()
         {
             var paginatedQuotes = await HttpService.GetQuotes();
-            Datacache.SetDatacache(paginatedQuotes.Quotes, 10);
+            PaginationData.SetDatacache(paginatedQuotes.Quotes, 10);
         }
 
-        public ICommand RemoveQuoteCommand => new Command<Quote>(async (quote) => await RemoveQuote(quote));
-        private async Task RemoveQuote(Quote quote)
+        public ICommand RemoveQuoteCommand => new Command<Quote>((quote) => RemoveQuote(quote));
+        private void RemoveQuote(Quote quote)
         {
             try
             {
-                Datacache.RemoveQuote(quote);
+                PaginationData.RemoveQuote(quote);
             }
             catch (Exception ex)
             {
@@ -35,15 +35,15 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        public ICommand PageDownCommand { get => new Command(async () => await PageDown()); }
-        private async Task PageDown()
+        public ICommand PageDownCommand { get => new Command(() => PageDown()); }
+        private void PageDown()
         {
             try
             {
                 // if on first page return
-                if (Datacache.PageNumber <= 1) return;
+                if (PaginationData.PageNumber <= 1) return;
 
-                Datacache.PreviousQuotes();
+                PaginationData.PreviousQuotes();
             }
             catch (Exception ex)
             {
@@ -51,15 +51,15 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        public ICommand PageUpCommand { get => new Command(async () => await PageUp()); }
-        private async Task PageUp()
+        public ICommand PageUpCommand { get => new Command(() => PageUp()); }
+        private void PageUp()
         {
             try
             {
                 // if last page return
-                if (Datacache.PageNumber >= Datacache.PageLimit) return;
+                if (PaginationData.PageNumber >= PaginationData.PageLimit) return;
 
-                Datacache.NextQuotes();
+                PaginationData.NextQuotes();
             }
             catch (Exception ex)
             {
@@ -80,11 +80,11 @@ namespace LordOfQuotes.ViewModels
             }
         }
 
-        private IPaginatedDatacache _datacache;
-        public IPaginatedDatacache Datacache
+        private IPaginatedDatacache _paginationData;
+        public IPaginatedDatacache PaginationData
         {
-            get => _datacache;
-            set => SetProperty(ref _datacache, value);
+            get => _paginationData;
+            set => SetProperty(ref _paginationData, value);
         }
     }
 }
