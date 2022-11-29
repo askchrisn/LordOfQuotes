@@ -25,8 +25,8 @@ namespace LordOfQuotes.ViewModels
                 // shell breaking serialization because too long
                 // pass quote id and get it again
                 Quote = await HttpService.GetQuote(QuoteId);
-                Movie = await HttpService.GetMovie(QuoteId);
-                Character = await HttpService.GetCharacter(QuoteId);
+                Movie = await HttpService.GetMovie(Quote.Movie);
+                Character = await HttpService.GetCharacter(Quote.Character);
             }
             catch(Exception ex)
             {

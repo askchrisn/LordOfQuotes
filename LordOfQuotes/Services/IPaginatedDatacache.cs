@@ -11,8 +11,7 @@ namespace LordOfQuotes.Services
         int PageLimit { get; }
         ObservableCollection<Quote> Quotes { get; }
         void SetDatacache(List<Quote> quotes, int itemsPerPage);
-        void RemoveQuote(Quote quote);
-        void AddNewQuote();
+        bool RemoveQuote(Quote quote);
         void PreviousQuotes();
         void NextQuotes();
     }

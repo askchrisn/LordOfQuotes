@@ -22,9 +22,10 @@ namespace LordOfQuotes.Services
             PaginationString = $"{PageNumber} of {PageLimit}";
         }
 
-        public void RemoveQuote(Quote quote)
+        public bool RemoveQuote(Quote quote)
         {
             var identicalQuote = AllQuotes.FirstOrDefault(x => x.Id == quote.Id);
+
             AllQuotes.Remove(identicalQuote);
             Quotes.Remove(identicalQuote);
 
@@ -35,15 +36,8 @@ namespace LordOfQuotes.Services
             {
                 PreviousQuotes();
             }
-        }
 
-        public void AddNewQuote()
-        {
-            var nextIndex = AllQuotes.IndexOf(Quotes.LastOrDefault())+1;
-            // if there are no more quotes to add, return
-            if (nextIndex >= AllQuotes.Count - 1) return;
-
-            Quotes.Add(AllQuotes[nextIndex]);
+            return true;
         }
 
         public void NextQuotes()
@@ -62,6 +56,16 @@ namespace LordOfQuotes.Services
             var startIndex = AllQuotes.IndexOf(Quotes.FirstOrDefault()) - ItemsPerPage;
             Quotes = new ObservableCollection<Quote>(CreateSubset(startIndex));
             PaginationString = $"{PageNumber} of {PageLimit}";
+        }
+
+        private void AddNewQuote()
+        {
+            var nextIndex = AllQuotes.IndexOf(Quotes.LastOrDefault()) + 1;
+            // if there are no more quotes to add, return
+            if (nextIndex >= AllQuotes.Count) return;
+
+            Quotes.Add(AllQuotes[nextIndex]);
+            return;
         }
 
         private List<Quote> CreateSubset(int index)

@@ -10,15 +10,11 @@ namespace LordOfQuotes.Services.DataServices
     public class ApiServiceBase
     {
         HttpClient client;
-        internal string authKey { private get; set; }
-        internal string baseUrl { private get; set; }
+        protected virtual string authKey => throw new NotImplementedException();
+        protected virtual string baseUrl => throw new NotImplementedException();
 
         public ApiServiceBase()
         {
-            // should have been read in from DB connection of sorts
-            authKey = "ArKxecgybWqdt767qKpB";
-            baseUrl = "the-one-api.dev/";
-
             client = new HttpClient();
         }
 

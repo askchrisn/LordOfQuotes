@@ -9,6 +9,9 @@ namespace LordOfQuotes.Services
 {
     public class HttpService : ApiServiceBase, IHttpService
     {
+        protected override string authKey => "ArKxecgybWqdt767qKpB";
+        protected override string baseUrl => "the-one-api.dev/";
+
         public async Task<PaginatedQuotes> GetQuotes()
         {
             var dto = await GetAsync<QuoteListDto>($"v2/quote?limit=20");
