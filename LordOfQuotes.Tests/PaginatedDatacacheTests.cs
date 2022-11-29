@@ -14,15 +14,15 @@ namespace LordOfQuotes.Tests
         public PaginatedDatacacheTests()
         {
             List<Quote> quotes = new List<Quote>();
-            quotes.Add(CreateDummyQuote("Hi!"));
-            quotes.Add(CreateDummyQuote("Hey!"));
-            quotes.Add(CreateDummyQuote("Hello!"));
-
-            paginatedDatacache.SetDatacache(quotes, 1);
+            quotes.Add(CreateDummyQuote("Quote1!"));
+            quotes.Add(CreateDummyQuote("Quote2!"));
+            quotes.Add(CreateDummyQuote("Quote3!"));
+            quotes.Add(CreateDummyQuote("Quote4!"));
+            paginatedDatacache.SetDatacache(quotes, 2);
         }
 
         [Fact]
-        public void RemoveFromDatacache_RemoveExistingQuote_RemovesExistingAndAddNewQuote()
+        public void RemoveFromDatacache_RemoveAndAddsNextQuote()
         {
             // ARRANGE
             var quoteToRemove = paginatedDatacache.Quotes[0];
@@ -32,12 +32,32 @@ namespace LordOfQuotes.Tests
 
             // ASSERT
             Assert.True(isSuccess);
-            Assert.Equal("Hey!", paginatedDatacache.Quotes.First().Dialog);
+            Assert.Equal("Quote2!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("Quote3!", paginatedDatacache.Quotes[1].Dialog);
             Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
         }
 
         [Fact]
-        public void RemoveFromDatacache_AttemptToRemoveNewQuote_Fail()
+        public void RemoveFromDatacache_RemoveAndAddsNextQuoteReducePage()
+        {
+            // ARRANGE
+            var quoteToRemove1 = paginatedDatacache.Quotes[0];
+            var quoteToRemove2 = paginatedDatacache.Quotes[1];
+
+            // TEST
+            var isSuccess1 = paginatedDatacache.RemoveQuote(quoteToRemove1);
+            var isSuccess2 = paginatedDatacache.RemoveQuote(quoteToRemove2);
+
+            // ASSERT
+            Assert.True(isSuccess1);
+            Assert.True(isSuccess2);
+            Assert.Equal("Quote3!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("Quote4!", paginatedDatacache.Quotes[1].Dialog);
+            Assert.Equal("1 of 1", paginatedDatacache.PaginationString);
+        }
+
+        [Fact]
+        public void RemoveFromDatacache_Fails()
         {
             // ARRANGE
             var quoteToRemove = CreateDummyQuote("Bad test!");
@@ -47,8 +67,8 @@ namespace LordOfQuotes.Tests
 
             // ASSERT
             Assert.False(isSuccess);
-            Assert.Equal("Hi!", paginatedDatacache.Quotes.First().Dialog);
-            Assert.Equal("1 of 3", paginatedDatacache.PaginationString);
+            Assert.Equal("Quote1!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("1 of 2", paginatedDatacache.PaginationString);
         }
 
         private Quote CreateDummyQuote(string dialog)

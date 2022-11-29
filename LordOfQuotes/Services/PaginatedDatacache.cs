@@ -25,6 +25,7 @@ namespace LordOfQuotes.Services
         public bool RemoveQuote(Quote quote)
         {
             var identicalQuote = AllQuotes.FirstOrDefault(x => x.Id == quote.Id);
+            if (identicalQuote == null) return false;
 
             AllQuotes.Remove(identicalQuote);
             Quotes.Remove(identicalQuote);
