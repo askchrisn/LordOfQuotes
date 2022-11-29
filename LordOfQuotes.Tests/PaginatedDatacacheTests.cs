@@ -60,8 +60,8 @@ namespace LordOfQuotes.Tests
         public void RemoveFromDatacache_RemoveLastQuoteNoAdd()
         {
             // ARRANGE
-            var quoteToRemove = paginatedDatacache.Quotes[4];
             paginatedDatacache.NextQuotes();
+            var quoteToRemove = paginatedDatacache.Quotes[0];
 
             // TEST
             var isSuccess = paginatedDatacache.RemoveQuote(quoteToRemove);
@@ -69,7 +69,7 @@ namespace LordOfQuotes.Tests
             // ASSERT
             Assert.True(isSuccess);
             Assert.Single(paginatedDatacache.Quotes);
-            Assert.Equal("Quote3!", paginatedDatacache.Quotes[0].Dialog);
+            Assert.Equal("Quote4!", paginatedDatacache.Quotes[0].Dialog);
             Assert.Equal("2 of 2", paginatedDatacache.PaginationString);
         }
 
